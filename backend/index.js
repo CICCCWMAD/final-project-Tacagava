@@ -15,18 +15,21 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect('', {
-  useNewUrlParser: true,
-});
-
-const db = mongoose.connection;
-
-db.on('error', (error) => console.error(error));
-db.once('open', () => console.error('connected to database'));
+// Connect to MongoDB Atlas
+mongoose
+  .connect('mongodb+srv://tatygarcia833:<PJfKdcLsFIprDkWm>@cluster0.qxg0zn7.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch((error) => console.error('Failed to connect to MongoDB Atlas:', error));
 
 app.use('/api/auth', authenticationRoute);
-app.use('/api/posts', chatRoomRoute);
+app.use('/api/chatrooms', chatRoomRoute);
 
 app.listen(port, () => {
   console.log('Server is running');
 });
+
+
+

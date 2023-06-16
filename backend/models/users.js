@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { genSalt, hash, compare } = require('bcrypt');
 
 const usersSchema = new mongoose.Schema({
   name: {
@@ -23,7 +24,11 @@ const usersSchema = new mongoose.Schema({
   },
 });
 
+// Method to compare passwords
+usersSchema.methods.comparePassword = function (password) {
+  return compare(password, this.password);
+};
+
 module.exports = {
-  usersSchema,
   usersModel: mongoose.model('users', usersSchema),
 };

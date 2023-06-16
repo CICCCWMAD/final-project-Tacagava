@@ -8,6 +8,5 @@ const chatroomSchema = new mongoose.Schema({
 });
 
 module.exports = {
-  chatroomSchema,
-  categoriesModel: mongoose.model('chatroom', chatroomSchema),
+  chatroomModel: mongoose.model('chatroom', chatroomSchema),
 };
